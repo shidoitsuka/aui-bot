@@ -12,7 +12,7 @@ exports.run = (bot, message, args, prefix) => {
   try {
     // prettier-ignore
     embed.setAuthor("Help")
-    .setColor(0x0776b7)
+    .setColor(0xf21616)
     .setFooter(`Use ${prefix}help <command name> for advanced help. (Including usage, aliases, etc.)`);
     // all commands
     if (!args[0]) {
@@ -26,7 +26,7 @@ exports.run = (bot, message, args, prefix) => {
         embed.addField(`__**${Object.keys(commands)[i]}**__`, commands[Object.keys(commands)[i]].join(", "), false);
       }
       // prettier-ignore
-      embed.setDescription(`Usage: \`${prefix}command\`\nDescription: \`<this-is-required>\` \`[this-is-optional]\`\nPlease use NSFW channel to see available NSFW command(s).`);
+      embed.setDescription(`Usage: \`${prefix}command\`\nDescription: \`<this-is-required>\` \`[this-is-optional]\``);
       message.channel.send({ embed });
     } else {
       // advanced help
@@ -50,7 +50,7 @@ exports.run = (bot, message, args, prefix) => {
     const embed = new Discord.MessageEmbed()
       .setAuthor("Not found!")
       .setThumbnail("https://tinyurl.com/MikuError")
-      .setColor(0xf44336)
+      .setColor(0xf21616)
       .setDescription(idk);
     message.channel.send({ embed });
   } // END CATCH

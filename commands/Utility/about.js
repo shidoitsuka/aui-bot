@@ -9,19 +9,17 @@ exports.run = async (bot, message, args) => {
   const operatingSystem = `${os.type()} ${await os.oos().then(o => o)} ${os.arch()}`;
   // prettier-ignore
   const embed = new Discord.MessageEmbed()
-    .setAuthor(`About me`, "", "https://github.com/shidoitsuka/another-miku-bot")
-    .setThumbnail("https://tinyurl.com/MikuLogo")
-    .setColor(0x1a9ca8)
-    .setDescription("Hello, I'm Miku!\nA `just4fun` discord bot written over discord.js framework with ❤ by 12042#5754.")
+    .setAuthor(`About`, "", "https://github.com/shidoitsuka/aui-bot")
+    .setColor(0xf21616)
+    .setDescription("AUI Bot here to serve Among Us Indonesia server!\nWritten over [Discord.js](https://discord.js.org/) based on [Miku](https://github.com/shidoitsuka/another-miku-bot) with  ❤ by 12042#5754.")
     .addField("NodeJS version:", `${process.version.slice(1).split(".").join(".")}`, true)
-    .addField("discord.js version:", `${package.dependencies["discord.js"]}`, true)
+    .addField("Discord.js version:", `${package.dependencies["discord.js"]}`, true)
+    .addField("Miku version:", "v2.0", true)
     .addField("Executed Command(s):", bot.db.get("totalCommands"), true)
     .addField("CPU Usage:", cpuUsage, true)
     .addField("Memory Usage:", memoryUsage, true)
     .addField("OS Info:", operatingSystem, true)
-    .addField("Invite link:", "[Click Me!](https://discordapp.com/oauth2/authorize/?permissions=2080898303&scope=bot&client_id=364242246314360843)", true)
-    .addField("Fan server is here!!", "[Click Me!](https://discord.gg/uxseTvy)", true)
-    .setFooter(`Click title for my source-code | v${package.version}-beta`);
+    .setFooter(`Click title for source code | v${package.version}-initial`);
   message.channel.send({ embed });
 };
 

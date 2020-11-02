@@ -10,7 +10,7 @@ exports.run = (bot, message, args) => {
     (error, response, body) => {
       const embed = new Discord.MessageEmbed()
         .setAuthor("Miku -- Shorten")
-        .setColor(0xaed581)
+        .setColor(0xf21616)
         .addField("URL:", args[0], true)
         .addField("Short Link:", `${body}`, true)
         .setFooter("Powered by tinyurl.com");

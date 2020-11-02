@@ -17,7 +17,7 @@ exports.run = (bot, message, args) => {
     availableTag = Object.keys(bot.db.get("guildConf", `${message.guild.id}.tags`)).join(", ");
     embed
       .setAuthor("Available Tags")
-      .setColor(0xf5ab35)
+      .setColor(0xf21616)
       .setDescription(`\`\`\`${availableTag}\`\`\``);
     return message.channel.send({ embed });
   }

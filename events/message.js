@@ -20,6 +20,11 @@ module.exports = message => {
        star: {
          starChannel: null,
          used: []
+       },
+       fbpost: {
+         channel: null,
+         ignores: [],
+         used: []
        }
      }, message.guild.id);
   }
@@ -50,7 +55,7 @@ module.exports = message => {
     // let user know they are not AFK anymore. it needs EMBED_LINKS
     embed
       .setAuthor("User AFK")
-      .setColor("#1a9ca8")
+      .setColor(0xf21616)
       .setDescription(texts.AFKWelcome(message))
       .setFooter("You are no longer in AFK mode.");
     message.channel.send({ embed });
@@ -76,7 +81,7 @@ module.exports = message => {
     // prettier-ignore
     embed
     .setAuthor("User AFK")
-    .setColor("#1a9ca8")
+    .setColor(0xf21616)
     .setDescription(`${texts.AFKMentioned()}\n\`\`\`${AFKreason}\`\`\``)
     .setFooter(`${message.author.username}, they are AFK at the moment. Please try again later!.`);
     message.channel.send({ embed });

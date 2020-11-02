@@ -1,16 +1,18 @@
 const fs = require("fs");
 const parameters = [
-  "\n-prefix     : set guild's custom prefix. (use \"default\" to use miku's default prefix)"
+  "\n-prefix     : set guild's custom prefix. (use \"default\" to use AUI's default prefix)"
 ].join("\n");
 
 exports.run = (bot, message, args) => {
-  let prefix, welcome, star;
+  let prefix, welcome, star, fbpost;
   prefix = bot.db.get("guildConf", `${message.guild.id}.prefix`);
   // prettier-ignore
   bot.db.get("guildConf", `${message.guild.id}.star.starChannel`) == null ? star = "not specified!" : star = bot.channels.cache.get(bot.db.get("guildConf", `${message.guild.id}.star.starChannel`)).name;
+  bot.db.get("guildConf", `${message.guild.id}.fbpost.channel`) == null ? fbpost = "not specified!" : fbpost = bot.channels.cache.get(bot.db.get("guildConf", `${message.guild.id}.fbpost.channel`)).name;
   // prettier-ignore
   if (!args[0]) return message.channel.send(`prefix          :: ${prefix}
-star            :: ${star}`,
+star            :: ${star}
+fbpost          :: ${fbpost}`,
       { code: "asciidoc" }
     );
 
@@ -45,6 +47,19 @@ star            :: ${star}`,
       bot.db.set("guildConf", message.mentions.channels.first().id, `${message.guild.id}.star.starChannel`);
       // prettier-ignore
       message.channel.send(`I\'ve set \`#${message.mentions.channels.first().name}\` as star channel!`);
+      break;
+    case "-fb":
+      // parameter to turn off starboard system
+      if (args[1] == "off") {
+        bot.db.set("guildConf", null, `${message.guild.id}.fbpost.channel`);
+        return message.channel.send("Turned off star system!");
+      }
+      // prettier-ignore
+      if (!message.mentions.channels.first()) return message.channel.send("No channel selected!");
+      // prettier-ignore
+      bot.db.set("guildConf", message.mentions.channels.first().id, `${message.guild.id}.fbpost.channel`);
+      // prettier-ignore
+      message.channel.send(`I\'ve set \`#${message.mentions.channels.first().name}\` as fb post channel!`);
       break;
     // DEFAULT VALUE
     default:

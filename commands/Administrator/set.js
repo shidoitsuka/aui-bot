@@ -1,6 +1,8 @@
 const fs = require("fs");
 const parameters = [
-  "\n-prefix     : set guild's custom prefix. (use \"default\" to use AUI's default prefix)"
+  "\n-prefix     : set guild's custom prefix. (use \"default\" to use AUI's default prefix)",
+  "\n-star       : set guild's starboard post channel.",
+  "\n-bestmemes  : set guild's best memes post channel."
 ].join("\n");
 
 exports.run = (bot, message, args) => {
@@ -12,7 +14,7 @@ exports.run = (bot, message, args) => {
   // prettier-ignore
   if (!args[0]) return message.channel.send(`prefix          :: ${prefix}
 star            :: ${star}
-fbpost          :: ${fbpost}`,
+best memes      :: ${fbpost}`,
       { code: "asciidoc" }
     );
 
@@ -48,7 +50,7 @@ fbpost          :: ${fbpost}`,
       // prettier-ignore
       message.channel.send(`I\'ve set \`#${message.mentions.channels.first().name}\` as star channel!`);
       break;
-    case "-fb":
+    case "-bestmemes":
       // parameter to turn off starboard system
       if (args[1] == "off") {
         bot.db.set("guildConf", null, `${message.guild.id}.fbpost.channel`);
@@ -59,7 +61,7 @@ fbpost          :: ${fbpost}`,
       // prettier-ignore
       bot.db.set("guildConf", message.mentions.channels.first().id, `${message.guild.id}.fbpost.channel`);
       // prettier-ignore
-      message.channel.send(`I\'ve set \`#${message.mentions.channels.first().name}\` as fb post channel!`);
+      message.channel.send(`I\'ve set \`#${message.mentions.channels.first().name}\` as best memes post channel!`);
       break;
     // DEFAULT VALUE
     default:
@@ -71,14 +73,14 @@ exports.conf = {
   aliases: [],
   cooldown: 1,
   guildOnly: true,
-  userPerm: [""],
-  botPerm: [""]
+  userPerm: ["ADMINISTRATOR"],
+  botPerm: ["ADMINISTRATOR"]
 };
 
 exports.help = {
   name: "set",
   category: "Administrator",
   description: "Guild configuration",
-  usage: "set -<param>",
+  usage: "set -<param> <value>",
   param: parameters
 };

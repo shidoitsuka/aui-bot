@@ -9,8 +9,8 @@ exports.conf = {
   aliases: [],
   cooldown: 1,
   guildOnly: true,
-  userPerm: [""],
-  botPerm: [""],
+  userPerm: ["ADMINISTRATOR"],
+  botPerm: ["ADMINISTRATOR"],
 };
 
 exports.help = {

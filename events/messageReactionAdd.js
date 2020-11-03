@@ -10,12 +10,12 @@ module.exports = async (reaction, user) => {
   // ignores reaction by bot
   if (user.bot) return;
   // ignores if reaction is less than 5,
-  if (reaction.count < 1) return;
+  if (reaction.count < 10) return;
   // ignores after minimum reaction is reached
-  if (reaction.count > 1) return;
+  if (reaction.count > 10) return;
 
   // listening to starboard system
-  if (reaction.emoji.name == "⭐") {
+  if (reaction.emoji.id == "759070335827443743") {
     // if star system is not active, return
     // prettier-ignore
     if (bot.db.get("guildConf", `${reaction.message.guild.id}.star.starChannel`) == null) return;
@@ -71,7 +71,7 @@ module.exports = async (reaction, user) => {
   }
 
   // listening to meme repost system
-  if (reaction.emoji.name == "😎") {
+  if (reaction.emoji.id == "756496852983218177") {
     // if meme system is not active, return
     // prettier-ignore
     if (bot.db.get("guildConf", `${reaction.message.guild.id}.fbpost.channel`) == null) return;

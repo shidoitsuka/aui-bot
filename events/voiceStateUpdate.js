@@ -57,14 +57,24 @@ module.exports = (oldState, newState) => {
         bot.db.set("userVoiceConf", { name: userName, channel: null }, userID);
       userName = bot.db.get("userVoiceConf", `${userID}.name`);
 
-      newState.guild.channels
-        .create(`${userName}'s Voice Channel`, { type: "voice" })
+      // newState.guild.channels
+      //   .create(`${userName}'s Voice Channel`, { type: "voice" })
+      //   .then((c) => {
+      //     bot.db.set("userVoiceConf", c.id, `${userID}.channel`);
+      //     newState.setChannel(c.id);
+      //     const channelPosition = c.position;
+      //     const guildSetupChannelPosition = newState.guild.channels.cache.get(guildSetupChannel).position;
+      //     newState.guild.channels.cache.get(c.id).setPosition(guildSetupChannelPosition + 1);
+      //   });
+      newState.guild.channels.cache
+        .get(guildSetupChannel)
+        .clone({ name: `${userName}'s Voice Channel`, tpye: "voice" })
         .then((c) => {
           bot.db.set("userVoiceConf", c.id, `${userID}.channel`);
           newState.setChannel(c.id);
-          const channelPosition = c.position;
-          const guildSetupChannelPosition = newState.guild.channels.cache.get(guildSetupChannel).position;
-          newState.guild.channels.cache.get(c.id).setPosition(guildSetupChannelPosition + 1);
+          // const channelPosition = c.position;
+          // const guildSetupChannelPosition = newState.guild.channels.cache.get(guildSetupChannel).position;
+          // newState.guild.channels.cache.get(c.id).setPosition(guildSetupChannelPosition + 1);
         });
     }
   }

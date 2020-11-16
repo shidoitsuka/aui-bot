@@ -15,7 +15,7 @@ module.exports = message => {
   } catch (_) {
     // prettier-ignore
     bot.db.set("guildConf", {
-       prefix: "q",
+       prefix: config.prefix,
        tags: {},
        star: {
          starChannel: null,
@@ -94,7 +94,7 @@ module.exports = message => {
 
   // if it does not starts with guild's custom prefix or default prefix or it's a bot, do nothing
   // prettier-ignore
-  if ((!message.content.startsWith(bot.db.get("guildConf", `${message.guild.id}.prefix`)) && !message.content.startsWith(config.prefix)) || message.author.bot) return;
+  if ((!message.content.startsWith(bot.db.get("guildConf", `${message.guild.id}.prefix`))) || message.author.bot) return;
 
   // define cmd if bot has the command that user ran
   if (bot.commands.has(command)) cmd = bot.commands.get(command);

@@ -63,8 +63,7 @@ module.exports = async (reaction, user) => {
     // prettier-ignore
     reaction.message.guild.channels.cache
     .get(bot.db.get("guildConf", `${reaction.message.guild.id}.star.starChannel`))
-    .send({ embed })
-    .then(m => m.react("⭐"));
+    .send({ embed });
     // then push used message id into DB, so it won't spam
     // prettier-ignore
     bot.db.push("guildConf", reaction.message.id, `${reaction.message.guild.id}.star.used`);
@@ -103,8 +102,7 @@ module.exports = async (reaction, user) => {
     // prettier-ignore
     reaction.message.guild.channels.cache
     .get(bot.db.get("guildConf", `${reaction.message.guild.id}.fbpost.channel`))
-    .send(attachment)
-    .then(m => m.react("😎"));
+    .send(attachment);
     // then push used message id into DB, so it won't spam
     // prettier-ignore
     bot.db.push("guildConf", reaction.message.id, `${reaction.message.guild.id}.fbpost.used`);

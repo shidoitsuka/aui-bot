@@ -1,6 +1,11 @@
 exports.run = (bot, message, args) => {
-    message.guild.channels.create("Join to create", { type: "voice" }).then(ch => {
-      bot.db.set("guildVoiceConf", ch.id, `${message.guild.id}.channel`);
+  if (typeof bot.db.get("guildVoiceConf", `${message.guild.id}.channel`) == "undefined") {
+    bot.db.set("guildVoiceConf", [], `${message.guild.id}.channel`);
+  }
+  message.guild.channels
+    .create("Join to create", { type: "voice" })
+    .then((ch) => {
+      bot.db.push("guildVoiceConf", ch.id, `${message.guild.id}.channel`);
       message.channel.send("Voice channel **Join to create** successfully created!");
     });
 };

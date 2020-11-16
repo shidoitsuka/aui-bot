@@ -1,3 +1,5 @@
+const { config } = require("../config.js");
+
 module.exports = (guild) => {
   const bot = guild.client;
   try {
@@ -6,7 +8,7 @@ module.exports = (guild) => {
   } catch (_) {
     // prettier-ignore
     bot.db.set("guildConf", {
-         prefix: "!",
+         prefix: config.prefix,
          tags: {},
          star: {
            starChannel: null,

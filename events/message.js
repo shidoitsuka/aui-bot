@@ -57,7 +57,7 @@ module.exports = message => {
       .setAuthor("User AFK")
       .setColor(0xf21616)
       .setDescription(texts.AFKWelcome(message))
-      .setFooter("You are no longer in AFK mode.");
+      .setFooter("Selamat datang kembali!.");
     message.channel.send({ embed });
   }
 

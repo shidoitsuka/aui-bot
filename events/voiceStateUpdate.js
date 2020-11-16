@@ -7,6 +7,8 @@ module.exports = (oldState, newState) => {
   const guildSetupChannel = bot.db.get("guildVoiceConf", `${oldState.guild.id}.channel`);
   const userSetupChannel = bot.db.get("userVoiceConf", `${userID}.channel`);
 
+  if (typeof guildSetupChannel == "undefined") return;
+  
   /*
    * checking if user is from another voice channel
    */

@@ -21,9 +21,9 @@ module.exports = message => {
          starChannel: null,
          used: []
        },
-       fbpost: {
+       bestmeme: {
          channel: null,
-         ignores: [],
+         accepts: [],
          used: []
        }
      }, message.guild.id);

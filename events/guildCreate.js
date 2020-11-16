@@ -13,6 +13,11 @@ module.exports = (guild) => {
          star: {
            starChannel: null,
            used: []
+         },
+         bestmeme: {
+           channel: null,
+           accepts: [],
+           used: []
          }
        }, guild.id);
   }

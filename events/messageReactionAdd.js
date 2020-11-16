@@ -5,8 +5,6 @@ module.exports = async (reaction, user) => {
   const bot = reaction.message.client;
   // if DM, return
   if (reaction.message.channel.type == "dm") return;
-  // ignores blacklisted channels
-  if (bot.db.get("guildConf", `${reaction.message.guild.id}.fbpost.ignores`).includes(reaction.message.channel.id)) return;
   // ignores reaction by bot
   if (user.bot) return;
   // ignores if reaction is less than 5,
@@ -16,6 +14,7 @@ module.exports = async (reaction, user) => {
 
   // listening to starboard system
   if (reaction.emoji.id == "759070335827443743") {
+  // if (reaction.emoji.name == "⭐") {
     // if star system is not active, return
     // prettier-ignore
     if (bot.db.get("guildConf", `${reaction.message.guild.id}.star.starChannel`) == null) return;
@@ -69,14 +68,19 @@ module.exports = async (reaction, user) => {
     bot.db.push("guildConf", reaction.message.id, `${reaction.message.guild.id}.star.used`);
   }
 
-  // listening to meme repost system
+
+  // listen only to bestmeme channels
+  if (!bot.db.get("guildConf", `${reaction.message.guild.id}.bestmeme.accepts`).includes(reaction.message.channel.id)) return;
+
+  // listening to meme repost system AKA best meme
   if (reaction.emoji.id == "756496852983218177") {
+  // if (reaction.emoji.name == "😎") {
     // if meme system is not active, return
     // prettier-ignore
-    if (bot.db.get("guildConf", `${reaction.message.guild.id}.fbpost.channel`) == null) return;
+    if (bot.db.get("guildConf", `${reaction.message.guild.id}.bestmeme.channel`) == null) return;
     // if it exist in starchannel, return
     // prettier-ignore
-    if (bot.db.get("guildConf", `${reaction.message.guild.id}.fbpost.used`).includes(reaction.message.id)) return;
+    if (bot.db.get("guildConf", `${reaction.message.guild.id}.bestmeme.used`).includes(reaction.message.id)) return;
     // var
     let msg;
     /*
@@ -101,10 +105,10 @@ module.exports = async (reaction, user) => {
     // get starchannel id and send it
     // prettier-ignore
     reaction.message.guild.channels.cache
-    .get(bot.db.get("guildConf", `${reaction.message.guild.id}.fbpost.channel`))
+    .get(bot.db.get("guildConf", `${reaction.message.guild.id}.bestmeme.channel`))
     .send(attachment);
     // then push used message id into DB, so it won't spam
     // prettier-ignore
-    bot.db.push("guildConf", reaction.message.id, `${reaction.message.guild.id}.fbpost.used`);
+    bot.db.push("guildConf", reaction.message.id, `${reaction.message.guild.id}.bestmeme.used`);
   }
 };

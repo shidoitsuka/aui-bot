@@ -3,19 +3,17 @@ const fs = require("fs");
 
 module.exports = async (reaction, user) => {
   const bot = reaction.message.client;
-  // if DM, return
-  if (reaction.message.channel.type == "dm") return;
-  // ignores reaction by bot
-  if (user.bot) return;
-  // ignores if reaction is less than 5,
+  // ignore DM & bot reactions
+  if (reaction.message.channel.type == "dm" || user.bot) return;
+  // ignore whean reaction is less than 5
   if (reaction.count < 10) return;
-  // ignores after minimum reaction is reached
+  // ignore after minimum reaction is reached
   if (reaction.count > 10) return;
 
   // listening to starboard system
   if (reaction.emoji.id == "759070335827443743") {
   // if (reaction.emoji.name == "⭐") {
-    // if star system is not active, return
+    // ignore when star system is not active
     // prettier-ignore
     if (bot.db.get("guildConf", `${reaction.message.guild.id}.star.starChannel`) == null) return;
     // if it exist in starchannel, return

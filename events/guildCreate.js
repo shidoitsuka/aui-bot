@@ -18,6 +18,11 @@ module.exports = (guild) => {
            channel: null,
            accepts: [],
            used: []
+         },
+         toptnt: {
+           channel: null,
+           accepts: [],
+           used: []
          }
        }, guild.id);
   }

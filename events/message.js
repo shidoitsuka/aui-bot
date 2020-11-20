@@ -25,6 +25,11 @@ module.exports = message => {
          channel: null,
          accepts: [],
          used: []
+       },
+       toptnt: {
+         channel: null,
+         accepts: [],
+         used: []
        }
      }, message.guild.id);
   }

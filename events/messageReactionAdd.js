@@ -11,7 +11,6 @@ module.exports = async (reaction, user) => {
 
   // listening to starboard system
   if (reaction.emoji.id == "759070335827443743") {
-    // if (reaction.emoji.name == "⭐") {
     // ignore when star system is not active
     // prettier-ignore
     if (bot.db.get("guildConf", `${reaction.message.guild.id}.star.starChannel`) == null) return;
@@ -65,13 +64,11 @@ module.exports = async (reaction, user) => {
     bot.db.push("guildConf", reaction.message.id, `${reaction.message.guild.id}.star.used`);
   }
 
-  // listen only to bestmeme channels
-  // prettier-ignore
-  if (!bot.db.get("guildConf", `${reaction.message.guild.id}.bestmeme.accepts`).includes(reaction.message.channel.id)) return;
-
   // listening to meme repost system AKA best meme
   if (reaction.emoji.id == "756496852983218177") {
-    // if (reaction.emoji.name == "😎") {
+    // listen only to specific channels
+    // prettier-ignore
+    if (!bot.db.get("guildConf", `${reaction.message.guild.id}.bestmeme.accepts`).includes(reaction.message.channel.id)) return;
     // ignore when meme system is not active
     // prettier-ignore
     if (bot.db.get("guildConf", `${reaction.message.guild.id}.bestmeme.channel`) == null) return;
@@ -109,11 +106,11 @@ module.exports = async (reaction, user) => {
     bot.db.push("guildConf", reaction.message.id, `${reaction.message.guild.id}.bestmeme.used`);
   }
 
-  // listen only to specific channels
-  // prettier-ignore
-  if (!bot.db.get("guildConf", `${reaction.message.guild.id}.toptnt.accepts`).includes(reaction.message.channel.id)) return;
   // listening to top tips n trick
   if (reaction.emoji.id == "765828890928218122") {
+    // listen only to specific channels
+    // prettier-ignore
+    if (!bot.db.get("guildConf", `${reaction.message.guild.id}.toptnt.accepts`).includes(reaction.message.channel.id)) return;
     // ignore when top tnt is not active
     // prettier-ignore
     if (bot.db.get("guildConf", `${reaction.message.guild.id}.toptnt.channel`) == null) return;
@@ -159,7 +156,7 @@ module.exports = async (reaction, user) => {
 
     // get channel id and send it
     // prettier-ignore
-    reaction.message.guild.channels
+    reaction.message.guild.channels.cache
     .get(bot.db.get("guildConf", `${reaction.message.guild.id}.toptnt.channel`))
     .send({ embed });
     // then push used message id into DB, so it won't spam

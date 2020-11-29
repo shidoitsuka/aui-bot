@@ -144,12 +144,12 @@ module.exports = async (reaction, user) => {
     .setTimestamp();
     if (msg.attachments.size == 0) {
       // prettier-ignore
-      embed.addField("__**Content**__", `${msg.content}`, msg.content.length > 25 ? false : true);
+      embed.addField("__**Content**__", `${msg.content.length > 512 ? msg.content.substring(0, 512) + "...[Read more](" + msg.url + ")" : msg.content}`, msg.content.length > 25 ? false : true);
     } else {
       const attachment = msg.attachments.map((a) => a.url);
       if (msg.content.length != 0) {
         // prettier-ignore
-        embed.addField("__**Content**__", `${msg.content}`, msg.content.length > 25 ? false : true);
+        embed.addField("__**Content**__", `${msg.content.length > 512 ? msg.content.substring(0, 512) + "..[Read more](" + msg.url +  ")" : msg.content}`, msg.content.length > 25 ? false : true);
       }
       embed.setImage(`${attachment}`);
     }

@@ -61,6 +61,7 @@ module.exports = (oldState, newState) => {
         .then((c) => {
           bot.db.set("userVoiceConf", c.id, `${userID}.channel`);
           newState.setChannel(c.id);
+          c.setPosition(newState.channel.position + 1);
           // const channelPosition = c.position;
           // const guildSetupChannelPosition = newState.guild.channels.cache.get(guildSetupChannel).position;
           // newState.guild.channels.cache.get(c.id).setPosition(guildSetupChannelPosition + 1);
